@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:payment/core/utils/assets.dart';
 import 'package:payment/core/utils/styles.dart';
+import 'package:payment/features/checkout/presentation/views/widgets/my_cart_view_body.dart';
 
 class MyCardView extends StatelessWidget {
   const MyCardView({super.key});
@@ -24,6 +25,7 @@ class MyCardView extends StatelessWidget {
           style: Styles.style25,
         ),
       ),
+      body: const MyCartViewBody(),
     );
   }
 }
