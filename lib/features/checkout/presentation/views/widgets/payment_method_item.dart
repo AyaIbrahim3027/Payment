@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../../core/utils/assets.dart';
 import '../../../../../core/utils/colors_manager.dart';
 
 class PaymentMethodItem extends StatelessWidget {
   const PaymentMethodItem({
     super.key,
-    this.isActive = false,
+    this.isActive = false, required this.image,
   });
 
   final bool isActive;
+  final String image;
 
   @override
   Widget build(BuildContext context) {
@@ -44,8 +44,7 @@ class PaymentMethodItem extends StatelessWidget {
         ),
         child: Center(
           child: SvgPicture.asset(
-            Assets.card,
-            height: 24,
+            image,
           ),
         ),
       ),
