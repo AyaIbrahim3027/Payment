@@ -4,8 +4,16 @@ import 'package:payment/features/checkout/presentation/views/widgets/payment_met
 
 import 'custom_credit_card.dart';
 
-class PaymentDetailsViewBody extends StatelessWidget {
+class PaymentDetailsViewBody extends StatefulWidget {
   const PaymentDetailsViewBody({super.key});
+
+  @override
+  State<PaymentDetailsViewBody> createState() => _PaymentDetailsViewBodyState();
+}
+
+class _PaymentDetailsViewBodyState extends State<PaymentDetailsViewBody> {
+  final GlobalKey<FormState> formKey = GlobalKey();
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
 
   @override
   Widget build(BuildContext context) {
@@ -14,16 +22,27 @@ class PaymentDetailsViewBody extends StatelessWidget {
         SliverToBoxAdapter(
           child: PaymentMethodsListView(),
         ),
-        const SliverToBoxAdapter(
-          child: CustomCreditCard(),
+        SliverToBoxAdapter(
+          child: CustomCreditCard(formKey: formKey,
+          autovalidateMode: autovalidateMode,),
         ),
-        const SliverFillRemaining(
+        SliverFillRemaining(
           hasScrollBody: false,
           child: Align(
-            alignment: Alignment.bottomCenter,
+              alignment: Alignment.bottomCenter,
               child: Padding(
-                padding: EdgeInsets.only(bottom: 12,left: 16,right: 16),
-                child: CustomButton(),
+                padding: const EdgeInsets.only(bottom: 12, left: 16, right: 16),
+                child: CustomButton(
+                  text: 'Pay',
+                  onTap: () {
+                    if (formKey.currentState!.validate()) {
+                      formKey.currentState!.save();
+                    } else {
+                      autovalidateMode = AutovalidateMode.always;
+                      setState(() {});
+                    }
+                  },
+                ),
               )),
         ),
       ],
