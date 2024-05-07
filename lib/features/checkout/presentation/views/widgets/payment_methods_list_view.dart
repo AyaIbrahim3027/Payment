@@ -3,16 +3,24 @@ import 'package:payment/features/checkout/presentation/views/widgets/payment_met
 
 import '../../../../../core/utils/assets.dart';
 
-class PaymentMethodsListView extends StatelessWidget {
+class PaymentMethodsListView extends StatefulWidget {
   PaymentMethodsListView({
     super.key,
   });
 
-  final List<String> paymentMethodsItems =  [
+  @override
+  State<PaymentMethodsListView> createState() => _PaymentMethodsListViewState();
+}
+
+class _PaymentMethodsListViewState extends State<PaymentMethodsListView> {
+  final List<String> paymentMethodsItems = [
     Assets.card,
     Assets.paypal,
     Assets.applepay,
   ];
+
+  int activeIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -20,12 +28,18 @@ class PaymentMethodsListView extends StatelessWidget {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: paymentMethodsItems.length,
-        itemBuilder: (context,index){
+        itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: PaymentMethodItem(
-              isActive: false,
-              image: paymentMethodsItems[index],
+            child: GestureDetector(
+              onTap: () {
+                activeIndex = index;
+                setState(() {});
+              },
+              child: PaymentMethodItem(
+                isActive: activeIndex == index,
+                image: paymentMethodsItems[index],
+              ),
             ),
           );
         },
