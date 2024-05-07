@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:payment/core/widgets/custom_button.dart';
+import 'package:payment/features/checkout/presentation/views/thank_you_view.dart';
 import 'package:payment/features/checkout/presentation/views/widgets/payment_methods_list_view.dart';
 
 import 'custom_credit_card.dart';
@@ -19,12 +20,14 @@ class _PaymentDetailsViewBodyState extends State<PaymentDetailsViewBody> {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
-        SliverToBoxAdapter(
+        const SliverToBoxAdapter(
           child: PaymentMethodsListView(),
         ),
         SliverToBoxAdapter(
-          child: CustomCreditCard(formKey: formKey,
-          autovalidateMode: autovalidateMode,),
+          child: CustomCreditCard(
+            formKey: formKey,
+            autovalidateMode: autovalidateMode,
+          ),
         ),
         SliverFillRemaining(
           hasScrollBody: false,
@@ -38,6 +41,10 @@ class _PaymentDetailsViewBodyState extends State<PaymentDetailsViewBody> {
                     if (formKey.currentState!.validate()) {
                       formKey.currentState!.save();
                     } else {
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (context) {
+                        return const ThankYouView();
+                      }));
                       autovalidateMode = AutovalidateMode.always;
                       setState(() {});
                     }

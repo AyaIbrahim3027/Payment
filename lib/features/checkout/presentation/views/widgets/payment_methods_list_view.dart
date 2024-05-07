@@ -4,7 +4,7 @@ import 'package:payment/features/checkout/presentation/views/widgets/payment_met
 import '../../../../../core/utils/assets.dart';
 
 class PaymentMethodsListView extends StatefulWidget {
-  PaymentMethodsListView({
+  const PaymentMethodsListView({
     super.key,
   });
 

@@ -25,6 +25,12 @@ abstract class Styles {
     fontWeight: FontWeight.w400,
   );
 
+  static const TextStyle style16 = TextStyle(
+    color: Colors.black,
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+  );
+
   static const TextStyle styleBold18 = TextStyle(
     color: Colors.black,
     fontSize: 18,
