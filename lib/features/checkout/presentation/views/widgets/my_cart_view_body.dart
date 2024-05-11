@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:payment/core/utils/assets.dart';
+import 'package:payment/features/checkout/data/repos/checkout_repo_impl.dart';
+import 'package:payment/features/checkout/presentation/manager/stripe_payment/stripe_payment_cubit.dart';
 import 'package:payment/features/checkout/presentation/views/widgets/payment_methods_bottom_sheet.dart';
 import 'package:payment/features/checkout/presentation/views/widgets/total_price.dart';
 import '../../../../../core/utils/colors_manager.dart';
@@ -67,7 +70,10 @@ class MyCartViewBody extends StatelessWidget {
                     borderRadius: BorderRadius.circular(16),
                   ),
                   builder: (context) {
-                    return const PaymentMethodsBottomSheet();
+                    return BlocProvider(
+                      create: (context) => StripePaymentCubit(CheckOutRepoImpl()),
+                      child: PaymentMethodsBottomSheet(),
+                    );
                   });
             },
           ),
